@@ -7,7 +7,7 @@ from functional import seq
 
 
 def read_data():
-    with open('fake.txt') as f:
+    with open('fakereal.txt') as f:
         return f.read().splitlines()
 
 
@@ -21,7 +21,7 @@ def is_mvpa_minute(mvpa_threshold):
 
 def get_result_with_py_functional():
     return seq(get_individual_heartrate(read_data())) \
-        .map(lambda heart_rate: is_mvpa_minute(mvpa_threshold=5)(heart_rate)) \
+        .map(lambda heart_rate: is_mvpa_minute(mvpa_threshold=119)(heart_rate)) \
         .reduce(lambda acc, current: [acc[0] + 1,  *acc[1:]] if current > 0 else [0,  *acc[0:]], [0, 0]) \
         .reduce(lambda acc, current: acc + current if current > 10 else acc, 0)
 
